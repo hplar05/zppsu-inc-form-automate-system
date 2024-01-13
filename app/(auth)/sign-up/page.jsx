@@ -14,7 +14,7 @@ export default function SignupPage() {
     setShowPassword(!showPassword);
   };
   return (
-    <main className="flex flex-col items-center justify-center border min-h-screen">
+    <main className="flex flex-col items-center justify-center border min-h-screen bg-white">
       <div className="border rounded-xl h-[610px] w-[500px] bg-[#F0EEF6]  shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)]">
         <div className="flex justify-end m-3">
           <button className="mt-1 w-9 border-black text-black text-xl cursor-pointer font-bold">
@@ -89,7 +89,7 @@ export default function SignupPage() {
           </label>
         </div>
         <div className="labelSignup-container">
-          <p className="text-left ml-4 mt-2">
+          <p className="text-left ml-4 mt-2 text-black">
             Already have an account?{" "}
             <span
               onClick={NavigatetoLoginPage}
