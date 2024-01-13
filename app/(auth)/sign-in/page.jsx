@@ -1,9 +1,26 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { auth } from "@/app/firebase/config";
 
 export default function LoginPage() {
   const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
+
+  const handleSignIn = async () => {
+    try {
+      const res = await signInWithEmailAndPassword(email, password);
+      console.log({ res });
+      setEmail("");
+      setPassword("");
+      router.push("/");
+    } catch (error) {
+      console.error(e);
+    }
+  };
 
   const NavigatetoSignupPage = () => {
     router.push("/sign-up");
@@ -47,6 +64,8 @@ export default function LoginPage() {
               className="rounded-full peer m-0 block h-[58px] w-full  bg-white bg-clip-padding px-3 py-4 text-base font-normal leading-tight text-black transition duration-200 ease-linear placeholder:text-transparent focus:border-primary focus:pb-[0.625rem] focus:pt-[1.625rem] focus:text-neutral-700 focus:outline-none peer-focus:text-primary  dark:peer-focus:text-primary [&:not(:placeholder-shown)]:pb-[0.625rem] [&:not(:placeholder-shown)]:pt-[1.625rem]"
               id="floatingInput"
               placeholder=""
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <label
               htmlFor="floatingInput"
@@ -61,6 +80,8 @@ export default function LoginPage() {
               className="rounded-full peer m-0 block h-[58px] w-full  bg-white bg-clip-padding px-3 py-4 text-base font-normal leading-tight text-black transition duration-200 ease-linear placeholder:text-transparent focus:border-primary focus:pb-[0.625rem] focus:pt-[1.625rem] focus:text-neutral-700 focus:outline-none peer-focus:text-primary  dark:peer-focus:text-primary [&:not(:placeholder-shown)]:pb-[0.625rem] [&:not(:placeholder-shown)]:pt-[1.625rem]"
               id="floatingPassword"
               placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <label
               htmlFor="floatingPassword"
@@ -101,7 +122,10 @@ export default function LoginPage() {
           </p>
         </div>
         <div className="ml-4 mr-4 mt-6">
-          <button className="bg-[#4DE69E] rounded-xl w-[470px] h-[50px] font-bold">
+          <button
+            className="bg-[#CF2E2E] rounded-xl w-[470px] h-[50px] font-bold"
+            onClick={handleSignIn}
+          >
             Log In
           </button>
         </div>
