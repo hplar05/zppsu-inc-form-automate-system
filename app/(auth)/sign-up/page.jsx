@@ -3,14 +3,12 @@ import React, { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth } from "@/app/firebase/config";
-import { UserAuth } from "@/app/context/AuthContext";
 import toast, { Toaster } from "react-hot-toast";
 
 export default function SignupPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { user, googleSignIn, logOut } = UserAuth();
 
   const [createUserWithEmailAndPassword] =
     useCreateUserWithEmailAndPassword(auth);
@@ -19,22 +17,15 @@ export default function SignupPage() {
     router.push("/sign-in");
   };
 
-  const handleGoogleSignUp = async () => {
-    try {
-      await googleSignIn();
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
   const handleSignUp = async () => {
     try {
       const res = await createUserWithEmailAndPassword(email, password);
       console.log({ res });
       sessionStorage.setItem("user", true);
-      if (res.user) {
-        router.push("/login");
-      }
+      setEmail("");
+      setPassword("");
+      toast.success("Successfully created!");
+      <Toaster />;
       router.push("/sign-in");
     } catch (e) {
       console.error(e);
@@ -124,10 +115,7 @@ export default function SignupPage() {
             </div>
           </div>
           <div className="h-[40px] grid items-center mt-3 ml-4 mr-4">
-            <label
-              className="border rounded-xl text-black text-center  bg-white h-[40px] grid items-center font-bold cursor-pointer"
-              onClick={handleGoogleSignUp}
-            >
+            <label className="border rounded-xl  bg-white h-[40px] grid items-center font-bold cursor-pointer">
               Continue with Google
             </label>
           </div>
