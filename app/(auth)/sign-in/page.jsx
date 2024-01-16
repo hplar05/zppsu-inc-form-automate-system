@@ -16,9 +16,11 @@ export default function LoginPage() {
       console.log({ res });
       setEmail("");
       setPassword("");
-      router.push("/");
-    } catch (error) {
-      console.error(e);
+      if (res.user) {
+        router.push("/");
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -106,7 +108,7 @@ export default function LoginPage() {
           </div>
         </div>
         <div className="h-[40px] grid items-center mt-3 ml-4 mr-4">
-          <label className="border rounded-xl  bg-white h-[40px] grid items-center font-bold cursor-pointer">
+          <label className="border rounded-xl  bg-white h-[40px] grid items-center font-bold cursor-pointer text-black text-center">
             Continue with Google
           </label>
         </div>

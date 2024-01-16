@@ -24,9 +24,9 @@ export default function SignupPage() {
       sessionStorage.setItem("user", true);
       setEmail("");
       setPassword("");
-      toast.success("Successfully created!");
-      <Toaster />;
-      router.push("/sign-in");
+      if (res.user) {
+        router.push("/sign-in");
+      }
     } catch (e) {
       console.error(e);
     }
@@ -63,82 +63,80 @@ export default function SignupPage() {
             </p>
           </div>
         </div>
-        <form>
-          <div className="input-container grid gap-1 h-[120px] mt-12 ml-4 mr-4">
-            <div className="relative mb-3">
-              <input
-                type="email"
-                className="rounded-full peer m-0 block h-[58px] w-full  bg-white bg-clip-padding px-3 py-4 text-base font-normal leading-tight text-black transition duration-200 ease-linear placeholder:text-transparent focus:border-primary focus:pb-[0.625rem] focus:pt-[1.625rem] focus:text-neutral-700 focus:outline-none peer-focus:text-primary  dark:peer-focus:text-primary [&:not(:placeholder-shown)]:pb-[0.625rem] [&:not(:placeholder-shown)]:pt-[1.625rem]"
-                id="floatingInput"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder=""
-                required
-              />
-              <label
-                htmlFor="floatingInput"
-                className="pointer-events-none absolute left-0 top-0 origin-[0_0] border border-solid border-transparent px-3 py-4 text-[#00000080] transition-[opacity,_transform] duration-200 ease-linear peer-focus:-translate-y-2 peer-focus:translate-x-[0.15rem] peer-focus:scale-[0.85] peer-focus:text-primary peer-[:not(:placeholder-shown)]:-translate-y-2 peer-[:not(:placeholder-shown)]:translate-x-[0.15rem] peer-[:not(:placeholder-shown)]:scale-[0.85] motion-reduce:transition-none dark:peer-focus:text-primary"
-              >
-                Email<span className="text-[#FF2222]">*</span>
-              </label>
-            </div>
-            <div className="relative mb-3">
-              <input
-                type="password"
-                className="rounded-full peer m-0 block h-[58px] w-full  bg-white bg-clip-padding px-3 py-4 text-base font-normal leading-tight text-black transition duration-200 ease-linear placeholder:text-transparent focus:border-primary focus:pb-[0.625rem] focus:pt-[1.625rem] focus:text-neutral-700 focus:outline-none peer-focus:text-primary  dark:peer-focus:text-primary [&:not(:placeholder-shown)]:pb-[0.625rem] [&:not(:placeholder-shown)]:pt-[1.625rem]"
-                id="floatingPassword"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-              <label
-                htmlFor="floatingPassword"
-                className="pointer-events-none absolute left-0 top-0 origin-[0_0] border border-solid border-transparent px-3 py-4 text-[#00000080] transition-[opacity,_transform] duration-200 ease-linear peer-focus:-translate-y-2 peer-focus:translate-x-[0.15rem] peer-focus:scale-[0.85] peer-focus:text-primary peer-[:not(:placeholder-shown)]:-translate-y-2 peer-[:not(:placeholder-shown)]:translate-x-[0.15rem] peer-[:not(:placeholder-shown)]:scale-[0.85] motion-reduce:transition-none dark:peer-focus:text-primary"
-              >
-                Password<span className="text-[#FF2222]">*</span>
-              </label>
-            </div>
-          </div>
-          <div className="text-right text-black">
-            <p className="italic mt-9 mb-4 mr-5 cursor-pointer">
-              Forgot Password?
-            </p>
-          </div>
-          <div className="flex flex-col items-center h-[20px] ml-5 mr-5">
-            <div className="flex items-center w-full">
-              <div className="flex-grow h-px bg-gray-200 dark:bg-[#00000066]"></div>
-              <p className="text-white dark:text-black text-xs mx-7 font-extrabold">
-                OR
-              </p>
-              <div className="flex-grow h-px bg-gray-200 dark:bg-[#00000066]"></div>
-            </div>
-          </div>
-          <div className="h-[40px] grid items-center mt-3 ml-4 mr-4">
-            <label className="border rounded-xl  bg-white h-[40px] grid items-center font-bold cursor-pointer">
-              Continue with Google
+        <div className="input-container grid gap-1 h-[120px] mt-12 ml-4 mr-4">
+          <div className="relative mb-3">
+            <input
+              type="email"
+              className="rounded-full peer m-0 block h-[58px] w-full  bg-white bg-clip-padding px-3 py-4 text-base font-normal leading-tight text-black transition duration-200 ease-linear placeholder:text-transparent focus:border-primary focus:pb-[0.625rem] focus:pt-[1.625rem] focus:text-neutral-700 focus:outline-none peer-focus:text-primary  dark:peer-focus:text-primary [&:not(:placeholder-shown)]:pb-[0.625rem] [&:not(:placeholder-shown)]:pt-[1.625rem]"
+              id="floatingInput"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder=""
+              required
+            />
+            <label
+              htmlFor="floatingInput"
+              className="pointer-events-none absolute left-0 top-0 origin-[0_0] border border-solid border-transparent px-3 py-4 text-[#00000080] transition-[opacity,_transform] duration-200 ease-linear peer-focus:-translate-y-2 peer-focus:translate-x-[0.15rem] peer-focus:scale-[0.85] peer-focus:text-primary peer-[:not(:placeholder-shown)]:-translate-y-2 peer-[:not(:placeholder-shown)]:translate-x-[0.15rem] peer-[:not(:placeholder-shown)]:scale-[0.85] motion-reduce:transition-none dark:peer-focus:text-primary"
+            >
+              Email<span className="text-[#FF2222]">*</span>
             </label>
           </div>
-          <div className="labelSignup-container">
-            <p className="text-left ml-4 mt-2 text-black">
-              Already have an account?{" "}
-              <span
-                onClick={NavigatetoLoginPage}
-                className="text-[#0227EB] cursor-pointer"
-              >
-                Log In
-              </span>
-            </p>
-          </div>
-          <div className="ml-4 mr-4 mt-6">
-            <button
-              className="bg-[#CF2E2E] rounded-xl w-[470px] h-[50px] font-bold"
-              onClick={handleSignUp}
+          <div className="relative mb-3">
+            <input
+              type="password"
+              className="rounded-full peer m-0 block h-[58px] w-full  bg-white bg-clip-padding px-3 py-4 text-base font-normal leading-tight text-black transition duration-200 ease-linear placeholder:text-transparent focus:border-primary focus:pb-[0.625rem] focus:pt-[1.625rem] focus:text-neutral-700 focus:outline-none peer-focus:text-primary  dark:peer-focus:text-primary [&:not(:placeholder-shown)]:pb-[0.625rem] [&:not(:placeholder-shown)]:pt-[1.625rem]"
+              id="floatingPassword"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <label
+              htmlFor="floatingPassword"
+              className="pointer-events-none absolute left-0 top-0 origin-[0_0] border border-solid border-transparent px-3 py-4 text-[#00000080] transition-[opacity,_transform] duration-200 ease-linear peer-focus:-translate-y-2 peer-focus:translate-x-[0.15rem] peer-focus:scale-[0.85] peer-focus:text-primary peer-[:not(:placeholder-shown)]:-translate-y-2 peer-[:not(:placeholder-shown)]:translate-x-[0.15rem] peer-[:not(:placeholder-shown)]:scale-[0.85] motion-reduce:transition-none dark:peer-focus:text-primary"
             >
-              Sign Up
-            </button>
+              Password<span className="text-[#FF2222]">*</span>
+            </label>
           </div>
-        </form>
+        </div>
+        <div className="text-right text-black">
+          <p className="italic mt-9 mb-4 mr-5 cursor-pointer">
+            Forgot Password?
+          </p>
+        </div>
+        <div className="flex flex-col items-center h-[20px] ml-5 mr-5">
+          <div className="flex items-center w-full">
+            <div className="flex-grow h-px bg-gray-200 dark:bg-[#00000066]"></div>
+            <p className="text-white dark:text-black text-xs mx-7 font-extrabold">
+              OR
+            </p>
+            <div className="flex-grow h-px bg-gray-200 dark:bg-[#00000066]"></div>
+          </div>
+        </div>
+        <div className="h-[40px] grid items-center mt-3 ml-4 mr-4">
+          <label className="border rounded-xl  bg-white h-[40px] grid items-center font-bold cursor-pointer text-black text-center">
+            Continue with Google
+          </label>
+        </div>
+        <div className="labelSignup-container">
+          <p className="text-left ml-4 mt-2 text-black">
+            Already have an account?{" "}
+            <span
+              onClick={NavigatetoLoginPage}
+              className="text-[#0227EB] cursor-pointer"
+            >
+              Log In
+            </span>
+          </p>
+        </div>
+        <div className="ml-4 mr-4 mt-6">
+          <button
+            className="bg-[#CF2E2E] rounded-xl w-[470px] h-[50px] font-bold"
+            onClick={handleSignUp}
+          >
+            Sign Up
+          </button>
+        </div>
       </div>
     </main>
   );
