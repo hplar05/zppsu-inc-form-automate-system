@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth } from "@/app/firebase/config";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -17,10 +18,12 @@ export default function LoginPage() {
       setEmail("");
       setPassword("");
       if (res.user) {
+        toast.success("Successfully Login");
         router.push("/");
       }
     } catch (err) {
       console.log(err);
+      toast.error(err);
     }
   };
 

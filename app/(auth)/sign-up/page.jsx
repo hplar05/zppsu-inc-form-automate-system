@@ -25,10 +25,12 @@ export default function SignupPage() {
       setEmail("");
       setPassword("");
       if (res.user) {
+        toast.success("Successfully Registered!");
         router.push("/sign-in");
       }
-    } catch (e) {
-      console.error(e);
+    } catch (err) {
+      console.log(err);
+      toast.error(err);
     }
   };
 
