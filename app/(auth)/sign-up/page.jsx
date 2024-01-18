@@ -147,7 +147,7 @@ export default function SignupPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 {...register("password", {
                   required: true,
-                  minLength: 5,
+                  minLength: 7,
                   maxLength: 20,
                 })}
               />
@@ -161,7 +161,7 @@ export default function SignupPage() {
                 {errors.password?.type === "required" &&
                   "Password is required!"}
                 {errors.password?.type === "minLength" &&
-                  "Entered password is less than 5 characters"}
+                  "Entered password is less than 7 characters"}
                 {errors.password?.type === "maxLength" &&
                   "Entered password is more than 20 characters"}
               </error>
