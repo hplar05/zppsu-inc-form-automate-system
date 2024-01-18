@@ -46,7 +46,7 @@ const Navbar = () => {
             className="ml-3 mr-6 ccursor-pointer bg-[#CF2E2E] rounded-md  w-20 text-center text-white"
             onClick={handleSignOut}
           >
-            Sign Out
+            Logout
           </button>
         </div>
       )}
