@@ -6,8 +6,8 @@ import toast, {Toaster} from 'react-hot-toast'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'INC FORM AUTOMATE',
-  description: 'INC FORM AUTOMATE',
+  title: 'ZPPSU INC FORM AUTOMATE',
+  description: 'ZPPSU INC FORM AUTOMATE',
 }
 
 export default function RootLayout({ children }) {

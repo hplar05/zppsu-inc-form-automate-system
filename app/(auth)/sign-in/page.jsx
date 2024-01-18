@@ -186,7 +186,7 @@ export default function LoginPage() {
           </div>
           <div className="ml-4 mr-4 mt-6">
             <button
-              className="bg-[#CF2E2E] rounded-xl w-[470px] h-[50px] font-bold"
+              className="bg-[#CF2E2E] text-white rounded-xl w-[470px] h-[50px] font-bold"
               onClick={handleSignIn}
             >
               Log In
