@@ -5,8 +5,10 @@ import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth } from "@/app/firebase/config";
 import toast, { Toaster } from "react-hot-toast";
 import { useForm } from "react-hook-form";
+import { UserAuth } from "@/app/context/AuthContext";
 
 export default function LoginPage() {
+  const { user, googleSignIn, logOut } = UserAuth();
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -31,6 +33,19 @@ export default function LoginPage() {
       toast.error("Email or Password is wrong!" || "An error occurred");
     }
   };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      await googleSignIn();
+      if (auth) {
+        router.push("/");
+        toast.success("Successfully Login!");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     const emailChangeHandler = (event) => {
       setEmail(event.target.value);
@@ -169,7 +184,10 @@ export default function LoginPage() {
             </div>
           </div>
           <div className="h-[40px] grid items-center mt-3 ml-4 mr-4">
-            <label className="border rounded-xl  bg-white h-[40px] grid items-center font-bold cursor-pointer text-black text-center">
+            <label
+              className="border rounded-xl  bg-white h-[40px] grid items-center font-bold cursor-pointer text-black text-center"
+              onClick={handleGoogleSignIn}
+            >
               Continue with Google
             </label>
           </div>

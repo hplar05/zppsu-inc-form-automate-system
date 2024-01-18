@@ -5,8 +5,10 @@ import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth } from "@/app/firebase/config";
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
+import { UserAuth } from "@/app/context/AuthContext";
 
 export default function SignupPage() {
+  const { user, googleSignIn, logOut } = UserAuth();
   const {
     register,
     formState: { errors },
@@ -20,6 +22,18 @@ export default function SignupPage() {
 
   const [createUserWithEmailAndPassword] =
     useCreateUserWithEmailAndPassword(auth);
+
+  const handleGoogleSignIn = async () => {
+    try {
+      await googleSignIn();
+      if (auth) {
+        router.push("/");
+        toast.success("Successfully Login!");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   // Set up Firebase listener for email
   useEffect(() => {
@@ -182,7 +196,10 @@ export default function SignupPage() {
             </div>
           </div>
           <div className="h-[40px] grid items-center mt-3 ml-4 mr-4">
-            <label className="border rounded-xl  bg-white h-[40px] grid items-center font-bold cursor-pointer text-black text-center">
+            <label
+              className="border rounded-xl  bg-white h-[40px] grid items-center font-bold cursor-pointer text-black text-center"
+              onClick={handleGoogleSignIn}
+            >
               Continue with Google
             </label>
           </div>
