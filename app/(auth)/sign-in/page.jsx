@@ -37,10 +37,13 @@ export default function LoginPage() {
   const handleGoogleSignIn = async () => {
     try {
       await googleSignIn();
-      if (auth) {
-        router.push("/");
-        toast.success("Successfully Login!");
-      }
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          // User is signed in
+          router.push("/");
+          toast.success("Successfully Login!");
+        }
+      });
     } catch (error) {
       console.log(error);
     }

@@ -26,10 +26,12 @@ export default function SignupPage() {
   const handleGoogleSignIn = async () => {
     try {
       await googleSignIn();
-      if (auth) {
-        router.push("/");
-        toast.success("Successfully Login!");
-      }
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          router.push("/");
+          toast.success("Successfully Registered!");
+        }
+      });
     } catch (error) {
       console.log(error);
     }
@@ -80,7 +82,7 @@ export default function SignupPage() {
       sessionStorage.setItem("user", true);
       if (res.user) {
         toast.success("Successfully Registered!");
-        router.push("/sign-in");
+        router.push("/");
       }
     } catch (err) {
       console.log(err);
@@ -141,7 +143,7 @@ export default function SignupPage() {
               >
                 {errors.email?.type === "required" && "Email is required"}
                 {errors.email?.type === "pattern" &&
-                  "Entered email is in the wrong format!"}
+                  "Entered email is in the wrong format"}
               </div>
 
               <label
@@ -172,8 +174,7 @@ export default function SignupPage() {
                 Password<span className="text-[#FF2222]">*</span>
               </label>
               <error className=" text-[#CF2E2E] ml-3 mt-1">
-                {errors.password?.type === "required" &&
-                  "Password is required!"}
+                {errors.password?.type === "required" && "Password is required"}
                 {errors.password?.type === "minLength" &&
                   "Entered password is less than 7 characters"}
                 {errors.password?.type === "maxLength" &&
