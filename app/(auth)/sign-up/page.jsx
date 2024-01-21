@@ -97,13 +97,13 @@ export default function SignupPage() {
   };
   return (
     <main className="flex flex-col items-center justify-center border min-h-screen bg-white">
-      <div className="border rounded-xl h-[620px] w-[500px] bg-[#F0EEF6]  shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)]">
+      <div className="border rounded-xl h-[620px] sm:w-[500px] w-full bg-[#F0EEF6]  shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)]">
         <div className="flex justify-end m-3">
           <button className="mt-1 w-9 border-black text-black text-xl cursor-pointer font-bold">
             X
           </button>
         </div>
-        <div className="grid justify-items-start pt-2 pl-5 text-black">
+        <div className="grid justify-items-start md:pt-2 md:pl-5 pt-2 ml-2 py-2 text-black">
           <label htmlFor="" className="text-[30px] font-bold">
             Sign Up
           </label>
@@ -217,7 +217,7 @@ export default function SignupPage() {
           </div>
           <div className="ml-4 mr-4 mt-6">
             <button
-              className="bg-[#CF2E2E] rounded-xl w-[470px] h-[50px] font-bold text-white"
+              className="bg-[#CF2E2E] rounded-xl w-full  md:w-[470px] h-[50px] font-bold text-white"
               onClick={handleSignUp}
             >
               Sign Up
